@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-3">
                 <a href="#" class="btn btn-primary " data-toggle="modal" data-target="#agregarClienteModal">
-                    <i class="fas fa-plus"> </i>Agregar Cliente
+                    <i class="fas fa-plus"> </i>Agregar Persona
                 </a>
             </div>
         </div>

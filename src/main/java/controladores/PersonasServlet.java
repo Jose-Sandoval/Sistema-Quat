@@ -11,13 +11,13 @@ import javax.servlet.http.*;
 import modelos.Domicilio;
 import modelos.Persona;
 
-@WebServlet("/Personas")
+@WebServlet("/PersonaServlet")
 
 public class PersonasServlet extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{   
-        listarDomicilios(request, response);                
+        listarPersonas(request, response);                
     }    
         
     @Override
@@ -32,7 +32,7 @@ public class PersonasServlet extends HttpServlet{
             System.out.println("persona: "+ persona);
         }        
         sesion.setAttribute("personas", personas);
-        request.getRequestDispatcher("/WEB-INF/personas/listarPersonas.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/personas/personas.jsp").forward(request, response);
         //response.sendRedirect("WEB-INF/listarPersonas.jsp");
     }
     

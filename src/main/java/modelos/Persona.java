@@ -3,10 +3,10 @@ package modelos;
 import java.util.Date;
 
 public class Persona {
-    private int idpersona;
+    private int idPersona;
     private String nombre;
-    private String apeMaterno;
-    private String apePaterno;
+    private String apMaterno;
+    private String apPaterno;
     private String email;
     private String celular;
     private Date fechaNac;
@@ -20,15 +20,15 @@ public class Persona {
     public Persona(){
     }
     
-    public Persona(int idpersona) {
-        this.idpersona = idpersona;
+    public Persona(int idPersona) {
+        this.idPersona = idPersona;
     }
 
-    public Persona(int idpersona, String nombre, String apeMaterno, String apePaterno, String celular, Date fechaNac, String sexo, String rfc, String foto, String tipo, String nacionalidad, String estatus, String email) {
-        this.idpersona = idpersona;
+    public Persona(int idPersona, String nombre, String apMaterno, String apPaterno, String celular, Date fechaNac, String sexo, String rfc, String foto, String tipo, String nacionalidad, String estatus, String email) {
+        this.idPersona = idPersona;
         this.nombre = nombre;
-        this.apeMaterno = apeMaterno;
-        this.apePaterno = apePaterno;
+        this.apMaterno = apMaterno;
+        this.apPaterno = apPaterno;
         this.email = email;
         this.celular = celular;
         this.fechaNac = fechaNac;
@@ -40,10 +40,10 @@ public class Persona {
         this.estatus = estatus;
     }
 
-    public Persona(String nombre, String apeMaterno, String apePaterno, String celular, Date fechaNac, String sexo, String rfc, String foto, String tipo, String nacionalidad, String estatus, String email) {
+    public Persona(String nombre, String apMaterno, String apPaterno, String celular, Date fechaNac, String sexo, String rfc, String foto, String tipo, String nacionalidad, String estatus, String email) {
         this.nombre = nombre;
-        this.apeMaterno = apeMaterno;
-        this.apePaterno = apePaterno;
+        this.apMaterno = apMaterno;
+        this.apPaterno = apPaterno;
         this.email = email;
         this.celular = celular;
         this.fechaNac = fechaNac;
@@ -55,12 +55,12 @@ public class Persona {
         this.estatus = estatus;
     }
 
-    public int getIdpersona() {
-        return idpersona;
+    public int getIdPersona() {
+        return idPersona;
     }
 
-    public void setIdpersona(int idpersona) {
-        this.idpersona = idpersona;
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
 
     public String getNombre() {
@@ -71,20 +71,20 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getApeMaterno() {
-        return apeMaterno;
+    public String getApMaterno() {
+        return apMaterno;
     }
 
-    public void setApeMaterno(String apeMaterno) {
-        this.apeMaterno = apeMaterno;
+    public void setApMaterno(String apMaterno) {
+        this.apMaterno = apMaterno;
     }
 
-    public String getApePaterno() {
-        return apePaterno;
+    public String getApPaterno() {
+        return apPaterno;
     }
 
-    public void setApePaterno(String apePaterno) {
-        this.apePaterno = apePaterno;
+    public void setApPaterno(String apPaterno) {
+        this.apPaterno = apPaterno;
     }
 
     public String getEmail() {
@@ -161,6 +161,6 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "idpersona=" + idpersona + ", nombre=" + nombre + ", apeMaterno=" + apeMaterno + ", apePaterno=" + apePaterno + ", email=" + email + ", celular=" + celular + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus + '}';
+        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apMaterno=" + apMaterno + ", apPaterno=" + apPaterno + ", email=" + email + ", celular=" + celular + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus + '}';
     }            
 }

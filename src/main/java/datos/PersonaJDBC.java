@@ -54,12 +54,12 @@ public class PersonaJDBC {
          try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT_BY_ID);  
-            stmt.setInt(1, persona.getIdpersona());
+            stmt.setInt(1, persona.getIdPersona());
             rs = stmt.executeQuery();                    
             rs.absolute(1);//nos pocionamos en el primer registro devuelto
             persona.setNombre(rs.getString("nombre"));
-            persona.setApeMaterno(rs.getString("ap_materno"));
-            persona.setApePaterno(rs.getString("ap_paterno"));
+            persona.setApMaterno(rs.getString("ap_materno"));
+            persona.setApPaterno(rs.getString("ap_paterno"));
             persona.setEmail(rs.getString("email"));
             persona.setEstatus(rs.getString("estatus"));
             persona.setFechaNac(rs.getDate("fch_nacimiento"));
@@ -89,8 +89,8 @@ public class PersonaJDBC {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);            
             stmt.setString(1, persona.getNombre());
-            stmt.setString(2, persona.getApeMaterno());
-            stmt.setString(3, persona.getApePaterno());
+            stmt.setString(2, persona.getApMaterno());
+            stmt.setString(3, persona.getApPaterno());
             stmt.setDate(4, (Date) persona.getFechaNac());
             stmt.setString(5, persona.getSexo());
             stmt.setString(6, persona.getRfc());
@@ -121,8 +121,8 @@ public class PersonaJDBC {
             stmt = conn.prepareStatement(SQL_UPDATE);  
             
             stmt.setString(1, persona.getNombre());
-            stmt.setString(2, persona.getApeMaterno());
-            stmt.setString(3, persona.getApePaterno());
+            stmt.setString(2, persona.getApMaterno());
+            stmt.setString(3, persona.getApPaterno());
             stmt.setDate(4, (Date) persona.getFechaNac());
             stmt.setString(5, persona.getSexo());
             stmt.setString(6, persona.getRfc());
@@ -132,6 +132,7 @@ public class PersonaJDBC {
             stmt.setString(10, persona.getNacionalidad());
             stmt.setString(11, persona.getEstatus());
             stmt.setString(12, persona.getEmail());
+            stmt.setInt(13, persona.getIdPersona());
             
             rows = stmt.executeUpdate();  
         } catch (SQLException e) {
@@ -151,7 +152,7 @@ public class PersonaJDBC {
          try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_DELETE);                        
-            stmt.setInt(1, persona.getIdpersona());
+            stmt.setInt(1, persona.getIdPersona());
             rows = stmt.executeUpdate();  
         } catch (SQLException e) {
             e.printStackTrace(System.out);
