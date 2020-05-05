@@ -15,7 +15,7 @@ public class Persona {
     private String tipo;
     private String nacionalidad;
     private String estatus; 
-    private String email;
+    
 
     public Persona() {
     }
@@ -24,7 +24,7 @@ public class Persona {
         this.idPersona = idPersona;
     }
 
-    public Persona(String nombre, String apPaterno, String apMaterno, String fechaNac, String sexo, String rfc, String foto, String celular, String tipo, String nacionalidad, String estatus, String email) {
+    public Persona(String nombre, String apPaterno, String apMaterno, String fechaNac, String sexo, String rfc, String foto, String celular, String tipo, String nacionalidad, String estatus) {
         this.nombre = nombre;
         this.apPaterno = apPaterno;
         this.apMaterno = apMaterno;
@@ -36,10 +36,10 @@ public class Persona {
         this.tipo = tipo;
         this.nacionalidad = nacionalidad;
         this.estatus = estatus;
-        this.email = email;
+        
     }
 
-    public Persona(int idPersona, String nombre, String apPaterno, String apMaterno, String fechaNac, String sexo, String rfc, String foto, String celular, String tipo, String nacionalidad, String estatus, String email) {
+    public Persona(int idPersona, String nombre, String apPaterno, String apMaterno, String fechaNac, String sexo, String rfc, String foto, String celular, String tipo, String nacionalidad, String estatus) {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.apPaterno = apPaterno;
@@ -51,8 +51,7 @@ public class Persona {
         this.celular = celular;
         this.tipo = tipo;
         this.nacionalidad = nacionalidad;
-        this.estatus = estatus;
-        this.email = email;
+        this.estatus = estatus;        
     }
 
     public int getIdPersona() {
@@ -151,17 +150,9 @@ public class Persona {
         this.estatus = estatus;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String toString() {
-        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apPaterno=" + apPaterno + ", apMaterno=" + apMaterno + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", celular=" + celular + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus + ", email=" + email + '}';
+        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apPaterno=" + apPaterno + ", apMaterno=" + apMaterno + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", celular=" + celular + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus;
     }
 
               

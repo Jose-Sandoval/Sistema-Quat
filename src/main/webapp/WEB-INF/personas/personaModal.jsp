@@ -56,10 +56,7 @@
                             <div class="form-group" name="sexo">    
 
                                 <label for="estatus ">Estatus</label>
-                                <input type="text" class="form-control" name="estatus" value="${persona.estatus}"required />                            
-
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email"value="${persona.email}" required/>
+                                <input type="text" class="form-control" name="estatus" value="${persona.estatus}"required />                                
 
                             </div>  
                             <div class="form-group">

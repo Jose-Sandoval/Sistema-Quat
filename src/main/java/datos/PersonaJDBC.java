@@ -13,19 +13,13 @@ import modelos.Domicilio;
 import modelos.Persona;
 
 public class PersonaJDBC {
-    String buscar = "jose";
-    public String SQL_SELECT_SEARCH = "SELECT * FROM persona WHERE (nombre LIKE '%"+buscar+"%') or  (ap_paterno like '%"+buscar+"%') or"
-            + "(ap_materno LIKE '%"+buscar+"%') or (fch_nacimiento LIKE '%"+buscar+"%') or (sexo LIKE '%"+buscar+"%') or (rfc LIKE '%"+buscar+"%') "+
-            "or (celular LIKE '%"+buscar+"%') or (tipo LIKE '%"+buscar+"%') or (nacionalidad LIKE '%"+buscar+"%') or (estatus LIKE '%"+buscar+"%')  "+
-            "or (email LIKE '%"+buscar+"%') ";
-            
-    
+        
     private static final String SQL_SELECT = "SELECT * FROM persona";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM persona WHERE persona_id = ?";
     private static final String SQL_SELECT_BY_RFC = "SELECT persona_id FROM persona WHERE rfc=?";
     private static final String SQL_SELECT_PERSONA_DOMICILIO = "SELECT * FROM persona AS p INNER JOIN domicilio  AS d ON p.Persona_id = d.persona_id WHERE d.estatus = 'activo'";    
-    private static final String SQL_INSERT  = "INSERT INTO persona (nombre, ap_Materno, ap_Paterno, fch_nacimiento, sexo, rfc, foto, celular, tipo, nacionalidad, estatus, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE persona SET nombre=?, ap_Materno=?, ap_Paterno=?, fch_nacimiento=?, sexo=?, rfc=?, foto=?, celular=?, tipo=?, nacionalidad=?, estatus=?, email=? WHERE persona_id=?";
+    private static final String SQL_INSERT  = "INSERT INTO persona (nombre, ap_Materno, ap_Paterno, fch_nacimiento, sexo, rfc, foto, celular, tipo, nacionalidad, estatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE persona SET nombre=?, ap_Materno=?, ap_Paterno=?, fch_nacimiento=?, sexo=?, rfc=?, foto=?, celular=?, tipo=?, nacionalidad=?, estatus=? WHERE persona_id=?";
     private static final String SQL_DELETE = "DELETE FROM persona WHERE persona_id=?";
     private static final String SQL_DELETE_DOM = "DELETE FROM domicilio WHERE persona_id=?";    
     
@@ -37,8 +31,7 @@ public class PersonaJDBC {
         List<Persona> personas = new ArrayList();        
         String sql_select_search = "SELECT * FROM persona WHERE (nombre LIKE '%"+buscar+"%') or  (ap_paterno like '%"+buscar+"%') or"
             + "(ap_materno LIKE '%"+buscar+"%') or (fch_nacimiento LIKE '%"+buscar+"%') or (sexo LIKE '%"+buscar+"%') or (rfc LIKE '%"+buscar+"%') "+
-            "or (celular LIKE '%"+buscar+"%') or (tipo LIKE '%"+buscar+"%') or (nacionalidad LIKE '%"+buscar+"%') or (estatus LIKE '%"+buscar+"%')  "+
-            "or (email LIKE '%"+buscar+"%') ";
+            "or (celular LIKE '%"+buscar+"%') or (tipo LIKE '%"+buscar+"%') or (nacionalidad LIKE '%"+buscar+"%') or (estatus LIKE '%"+buscar+"%')";
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(sql_select_search);
@@ -49,7 +42,7 @@ public class PersonaJDBC {
                         rs.getString("ap_Paterno"),rs.getString("fch_nacimiento"),
                         rs.getString("sexo"), rs.getString("rfc"),rs.getString("foto"),
                         rs.getString("celular"),rs.getString("tipo"),rs.getString("nacionalidad"),
-                        rs.getString("estatus"),rs.getString("email"));
+                        rs.getString("estatus"));
                 personas.add(persona);                
             }
         } catch (SQLException e) {  
@@ -106,7 +99,7 @@ public class PersonaJDBC {
                         rs.getString("ap_Paterno"),rs.getString("fch_nacimiento"),
                         rs.getString("sexo"), rs.getString("rfc"),rs.getString("foto"),
                         rs.getString("celular"),rs.getString("tipo"),rs.getString("nacionalidad"),
-                        rs.getString("estatus"),rs.getString("email"));
+                        rs.getString("estatus"));
                 personas.add(persona);
                 Domicilio domicilio = new Domicilio(rs.getInt("domicilio_id"),
                         rs.getInt("persona_id"),rs.getString("calle"),rs.getString("numero"),
@@ -143,7 +136,7 @@ public class PersonaJDBC {
                         rs.getString("ap_Paterno"),rs.getString("fch_nacimiento"),
                         rs.getString("sexo"), rs.getString("rfc"),rs.getString("foto"),
                         rs.getString("celular"),rs.getString("tipo"),rs.getString("nacionalidad"),
-                        rs.getString("estatus"),rs.getString("email"));
+                        rs.getString("estatus"));
                 personas.add(persona);
             }
         } catch (SQLException e) {            
@@ -172,8 +165,7 @@ public class PersonaJDBC {
             rs.absolute(1);//nos pocionamos en el primer registro devuelto
             persona.setNombre(rs.getString("nombre"));
             persona.setApMaterno(rs.getString("ap_materno"));
-            persona.setApPaterno(rs.getString("ap_paterno"));
-            persona.setEmail(rs.getString("email"));
+            persona.setApPaterno(rs.getString("ap_paterno"));            
             persona.setEstatus(rs.getString("estatus"));
             persona.setFechaNac(rs.getString("fch_nacimiento"));
             persona.setFoto(rs.getString("foto"));
@@ -218,7 +210,7 @@ public class PersonaJDBC {
             stmt.setString(9, persona.getTipo());
             stmt.setString(10, persona.getNacionalidad());
             stmt.setString(11, persona.getEstatus());
-            stmt.setString(12, persona.getEmail());
+            
             
             rows = stmt.executeUpdate();  
         } catch (SQLException e) {
@@ -252,8 +244,7 @@ public class PersonaJDBC {
             stmt.setString(8, persona.getCelular());
             stmt.setString(9, persona.getTipo());
             stmt.setString(10, persona.getNacionalidad());
-            stmt.setString(11, persona.getEstatus());
-            stmt.setString(12, persona.getEmail());
+            stmt.setString(11, persona.getEstatus());            
             stmt.setInt(13, persona.getIdPersona());
             
             rows = stmt.executeUpdate();  

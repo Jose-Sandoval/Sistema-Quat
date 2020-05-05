@@ -117,9 +117,8 @@ public class PersonasServlet extends HttpServlet{
         String celular = request.getParameter("celular");
         String tipo = request.getParameter("tipo");        
         String nac = request.getParameter("nacionalidad");     
-        String estatus = request.getParameter("estatus");
-        String email = request.getParameter("email");   
-        Persona persona= new Persona(nombre, apMaterno, apPaterno, fn, sexo, rfc, foto, celular, tipo, nac, estatus, email);
+        String estatus = request.getParameter("estatus");        
+        Persona persona= new Persona(nombre, apMaterno, apPaterno, fn, sexo, rfc, foto, celular, tipo, nac, estatus);
         return persona;
     }
     

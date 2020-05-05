@@ -57,10 +57,7 @@
                             <div class="form-group" name="sexo">    
 
                                 <label for="estatus ">Estatus</label>
-                                <input type="text" class="form-control" name="estatus" required />                            
-
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" required/>
+                                <input type="text" class="form-control" name="estatus" required />                                
 
                             </div>  
                             <div class="form-group">

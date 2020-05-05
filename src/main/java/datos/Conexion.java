@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -14,7 +12,7 @@ public class Conexion {
     
     private static final String JDBC_URL="jdbc:mysql://localhost:3306/quat?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";    
     private static final String JDBC_USER="root";
-    private static final String JDBC_PASS="admin";
+    private static final String JDBC_PASS="desaqs";
     private static BasicDataSource ds;
     
     public static DataSource getDataSource(){
