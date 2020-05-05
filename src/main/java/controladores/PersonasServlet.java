@@ -1,6 +1,5 @@
 package controladores;
 
-import com.mysql.cj.Session;
 import datos.DomicilioJDBC;
 import datos.PersonaJDBC;
 import java.io.IOException;
@@ -12,34 +11,125 @@ import modelos.Domicilio;
 import modelos.Persona;
 
 @WebServlet("/PersonaServlet")
-
 public class PersonasServlet extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{   
-        listarPersonas(request, response);                
+        String accion = request.getParameter("accion");
+        if(accion!=null){
+            switch(accion){                       
+                case "eliminar":
+                    System.out.println("ENTRANDO A ELIMINAR PERSONA");
+                    eliminarPersona(request, response);                    
+                break;                                              
+                case "infor":       
+                    System.out.println("ENTRANDO A DESPLEGAR INFO");
+                    showInfo(request, response);
+                break;
+                default:
+                    listarPersonas(request, response); 
+                break;
+            }                
+        }else{
+            listarPersonas(request, response); 
+        }
     }    
         
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){       
-                
-    }   
-    
-    private void listarPersonas(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{        
-        HttpSession sesion = request.getSession();
-        List <Persona> personas = new PersonaJDBC().listar(); 
-        for(Persona persona: personas){
-            System.out.println("persona: "+ persona);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{   
+        String accion = request.getParameter("accion");
+        switch(accion){
+            case "insertar":                
+                System.out.println("ENTRANDO A INSERTAR PERSONA");
+                insertarPersona(request, response);
+            break; 
+            case "editar":
+                System.out.println("ENTRANDO A EDITAR PERSONA");
+                editar(request, response);                
+            break;            
         }        
-        sesion.setAttribute("personas", personas);
-        request.getRequestDispatcher("/WEB-INF/personas/personas.jsp").forward(request, response);
-        //response.sendRedirect("WEB-INF/listarPersonas.jsp");
+    }  
+
+    public void editar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        HttpSession sesion = request.getSession();
+        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
+        Persona persona = getParamsPer(request, response);
+        persona.setIdPersona(idPersona);        
+        System.out.println("persona = " + persona);
+        sesion.setAttribute("persona", persona);
+        request.getRequestDispatcher("/WEB-INF/personas/personaInfo.jsp").forward(request, response);        
     }
     
-    private void listarDomicilios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void eliminarPersona(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String id = request.getParameter("idPersona");
+        int idCliente = Integer.parseInt(id);        
+        int rowsD = new DomicilioJDBC().delete(idCliente);
+        int rowsP = new PersonaJDBC().delete(idCliente);        
+        response.sendRedirect("index.jsp");
+    }
+    
+    public void insertarPersona(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{                   
+        Persona persona = getParamsPer(request, response);        
+        int rowsP = new PersonaJDBC().insert(persona);  
+        Domicilio domicilio = getParamsDom(request, response);
+        int rowsD = new DomicilioJDBC().insert(domicilio);
+        response.sendRedirect("index.jsp");        
+    }
+        
+    private void listarPersonas(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{        
+        //HttpSession sesion = request.getSession();
+        List <Persona> personas = new PersonaJDBC().listar();             
+        request.setAttribute("personas", personas);
+        List <Domicilio> domicilios = new DomicilioJDBC().listar();
+        request.getRequestDispatcher("/WEB-INF/personas/personas.jsp").forward(request, response);
+        //response.sendRedirect("/WEB-INF/personas/personas.jsp");
+    }    
+    
+    public void showInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession sesion = request.getSession();
-        List<Domicilio> domicilios = new DomicilioJDBC().listar();
-        sesion.setAttribute("domicilios", domicilios);
-        request.getRequestDispatcher("/WEB-INF/domicilios/listarDomicilios.jsp").forward(request, response);
+        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
+        Persona per = new PersonaJDBC().encontrar(new Persona(idPersona));
+        Domicilio dom = new DomicilioJDBC().encontrar(new Domicilio(idPersona));
+        sesion.setAttribute("persona", per);
+        sesion.setAttribute("domicilio", dom);
+        request.getRequestDispatcher("/WEB-INF/personas/personaInfo.jsp").forward(request, response);        
+    }
+    
+    public Persona getParamsPer(HttpServletRequest request, HttpServletResponse response){
+        String nombre = request.getParameter("nombre");
+        String apPaterno = request.getParameter("apMaterno");
+        String apMaterno = request.getParameter("apPaterno");
+        String fn = request.getParameter("fch_nacimiento");
+        String sexo = request.getParameter("genero");
+        String rfc = request.getParameter("rfc");
+        String foto = request.getParameter("foto");
+        String celular = request.getParameter("celular");
+        String tipo = request.getParameter("tipo");        
+        String nac = request.getParameter("nacionalidad");     
+        String estatus = request.getParameter("estatus");
+        String email = request.getParameter("email");   
+        Persona persona= new Persona(nombre, apMaterno, apPaterno, fn, sexo, rfc, foto, celular, tipo, nac, estatus, email);
+        return persona;
+    }
+    
+    public Domicilio getParamsDom(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int personaId = new PersonaJDBC().obtenerId(request.getParameter("rfc")); 
+        int edo = 0;
+        int muni = 0;
+        String calle = request.getParameter("calle");
+        String numero = request.getParameter("numero");
+        String col = request.getParameter("colonia");
+        String cp = request.getParameter("cp");
+        if(!request.getParameter("edo").equals("")){
+            edo = Integer.parseInt(request.getParameter("edo"));
+        }
+        if(!request.getParameter("muni").equals("")){
+            muni = Integer.parseInt(request.getParameter("muni"));
+        }        
+        String tipo = request.getParameter("tipo");
+        String tel = request.getParameter("tel");
+        String estatus = "activo";
+        Domicilio domicilio = new Domicilio(personaId, calle, numero, col, cp, edo, muni, tipo, tel, estatus);
+        return domicilio;
     }
 }

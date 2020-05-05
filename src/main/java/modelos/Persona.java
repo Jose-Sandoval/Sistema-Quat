@@ -5,54 +5,54 @@ import java.util.Date;
 public class Persona {
     private int idPersona;
     private String nombre;
-    private String apMaterno;
     private String apPaterno;
-    private String email;
-    private String celular;
-    private Date fechaNac;
+    private String apMaterno;    
+    private String fechaNac;
     private String sexo;
     private String rfc;
     private String foto;
+    private String celular;
     private String tipo;
     private String nacionalidad;
     private String estatus; 
+    private String email;
 
-    public Persona(){
+    public Persona() {
     }
-    
+
     public Persona(int idPersona) {
         this.idPersona = idPersona;
     }
 
-    public Persona(int idPersona, String nombre, String apMaterno, String apPaterno, String celular, Date fechaNac, String sexo, String rfc, String foto, String tipo, String nacionalidad, String estatus, String email) {
-        this.idPersona = idPersona;
+    public Persona(String nombre, String apPaterno, String apMaterno, String fechaNac, String sexo, String rfc, String foto, String celular, String tipo, String nacionalidad, String estatus, String email) {
         this.nombre = nombre;
-        this.apMaterno = apMaterno;
         this.apPaterno = apPaterno;
-        this.email = email;
-        this.celular = celular;
+        this.apMaterno = apMaterno;
         this.fechaNac = fechaNac;
         this.sexo = sexo;
         this.rfc = rfc;
         this.foto = foto;
+        this.celular = celular;
         this.tipo = tipo;
         this.nacionalidad = nacionalidad;
         this.estatus = estatus;
+        this.email = email;
     }
 
-    public Persona(String nombre, String apMaterno, String apPaterno, String celular, Date fechaNac, String sexo, String rfc, String foto, String tipo, String nacionalidad, String estatus, String email) {
+    public Persona(int idPersona, String nombre, String apPaterno, String apMaterno, String fechaNac, String sexo, String rfc, String foto, String celular, String tipo, String nacionalidad, String estatus, String email) {
+        this.idPersona = idPersona;
         this.nombre = nombre;
-        this.apMaterno = apMaterno;
         this.apPaterno = apPaterno;
-        this.email = email;
-        this.celular = celular;
+        this.apMaterno = apMaterno;
         this.fechaNac = fechaNac;
         this.sexo = sexo;
         this.rfc = rfc;
         this.foto = foto;
+        this.celular = celular;
         this.tipo = tipo;
         this.nacionalidad = nacionalidad;
         this.estatus = estatus;
+        this.email = email;
     }
 
     public int getIdPersona() {
@@ -71,14 +71,6 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getApMaterno() {
-        return apMaterno;
-    }
-
-    public void setApMaterno(String apMaterno) {
-        this.apMaterno = apMaterno;
-    }
-
     public String getApPaterno() {
         return apPaterno;
     }
@@ -87,27 +79,19 @@ public class Persona {
         this.apPaterno = apPaterno;
     }
 
-    public String getEmail() {
-        return email;
+    public String getApMaterno() {
+        return apMaterno;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setApMaterno(String apMaterno) {
+        this.apMaterno = apMaterno;
     }
 
-    public String getCelular() {
-        return celular;
+    public String getFechaNac() {
+        return fechaNac;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public Date getFechaNac() {
-        return this.fechaNac;
-    }
-
-    public void setFechaNac(Date fechaNac) {
+    public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
 
@@ -135,6 +119,14 @@ public class Persona {
         this.foto = foto;
     }
 
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
     public String getTipo() {
         return tipo;
     }
@@ -159,8 +151,18 @@ public class Persona {
         this.estatus = estatus;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apMaterno=" + apMaterno + ", apPaterno=" + apPaterno + ", email=" + email + ", celular=" + celular + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus + '}';
-    }            
+        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apPaterno=" + apPaterno + ", apMaterno=" + apMaterno + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", celular=" + celular + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus + ", email=" + email + '}';
+    }
+
+              
 }

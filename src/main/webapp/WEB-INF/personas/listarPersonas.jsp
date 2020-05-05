@@ -1,16 +1,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="es-MX"></fmt:setLocale>
 
-<section id="clientes">
+<section id="personas">
     <div class="container">
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Listado Personas</h4>
+                        <h4>Listado de Personas</h4>
                     </div>
                     <table class="table table-stiped">
                         <thead class="thead-dark">
@@ -20,25 +19,29 @@
                                 <th>nombre</th>
                                 <th>telefono</th>
                                 <th>tipo</th>
+                                <th>fecha de nacimiento</th>
                                 <th></th>
                             </tr>                            
                         </thead> 
                         <tbody>
-                            <!--iteramos la lista de clientes-->
+                            <!--iteramos la lista de personas-->
                         <c:forEach var="persona" items="${personas}" varStatus="status">
                                 <tr>
                                     <th>${status.count}</th>
                                     <th>${persona.idPersona}</th>
                                     <th>${persona.nombre} ${persona.apPaterno}</th>
                                     <th>${persona.celular}</th>
-                                    <th>${persona.tipo}</th>                                    
-                                    <th>
-                                        <a href="${pageContext.request.contextPath}/ServletControlador?accion=editar&idCliente=${cliente.idCliente}"
-                                           class="btn btn-secondary"><i class="fas fa-angle-double-right"></i>Editar
-                                        </a>
-                                        <a href="${pageContext.request.contextPath}/ServletControlador?accion=eliminar&idCliente=${cliente.idCliente}"
-                                           class="btn btn-danger"><i class="fas fa-angle-double-right"></i>Eliminar
-                                        </a>                                                                        
+                                    <th>${persona.tipo}</th>
+                                    <th>${persona.fechaNac}</th>    
+                                    <th class="form-group">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">                                          
+                                            <a href="${pageContext.request.contextPath}/PersonaServlet?accion=infor&idPersona=${persona.idPersona}"
+                                               class="btn btn-info"><i class="fas fa-info-circle"></i>Info
+                                            </a>
+                                            <a href="${pageContext.request.contextPath}/PersonaServlet?accion=eliminar&idPersona=${persona.idPersona}"
+                                               class="btn btn-danger"><i class="fas fa-trash-alt"></i>Eliminar
+                                            </a>                                          
+                                        </div>
                                     </th>
                                 </tr>                                
                             </c:forEach>
@@ -49,11 +52,5 @@
         </div>
     </div>
 </section>
-<!--Agregar Cliente Modal-->   
-<%@include file="agregarPersonas.jsp"%>
-
-
-
-      
-
-    
+<!--Agregar Personas Modal-->   
+<%@include file="agregarPersona.jsp"%>

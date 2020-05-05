@@ -17,12 +17,11 @@ public class Domicilio {
     public Domicilio() {
     }
 
-    public Domicilio(int idDomicilio) {
-        this.idDomicilio = idDomicilio;
+    public Domicilio(int idPersona) {
+        this.idPersona = idPersona;
     }
-
-    public Domicilio(int idDomicilio, int idPersona, String calle, String numero, String colonia, String CP, int idEstado, int idMunDel, String tipo, String telefono, String estatus) {
-        this.idDomicilio = idDomicilio;
+    
+    public Domicilio(int idPersona, String calle, String numero, String colonia, String CP, int idEstado, int idMunDel, String tipo, String telefono, String estatus) {
         this.idPersona = idPersona;
         this.calle = calle;
         this.numero = numero;
@@ -34,8 +33,9 @@ public class Domicilio {
         this.telefono = telefono;
         this.estatus = estatus;
     }
-
-    public Domicilio(int idPersona, String calle, String numero, String colonia, String CP, int idEstado, int idMunDel, String tipo, String telefono, String estatus) {
+    
+    public Domicilio(int idDomicilio, int idPersona, String calle, String numero, String colonia, String CP, int idEstado, int idMunDel, String tipo, String telefono, String estatus) {
+        this.idDomicilio = idDomicilio;
         this.idPersona = idPersona;
         this.calle = calle;
         this.numero = numero;
