@@ -8,8 +8,12 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Listado de Personas</h4>
+                    <div class="card-header">                        
+                        <form action="${pageContext.request.contextPath}/PersonaServlet?accion=buscar"class="form-inline my-2 my-lg-0" method="post" >
+                            <input type="search" name="buscar" class="form-contro mr-sm-2" placeholder="Buscar Persona"/>
+                            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar      
+                            </button>
+                        </form>                        
                     </div>
                     <table class="table table-stiped">
                         <thead class="thead-dark">
@@ -43,7 +47,7 @@
                                             </a>                                          
                                         </div>
                                     </th>
-                                </tr>                                
+                                </tr>                                 
                             </c:forEach>
                         </tbody>
                     </table>

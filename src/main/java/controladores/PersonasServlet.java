@@ -47,9 +47,20 @@ public class PersonasServlet extends HttpServlet{
                 System.out.println("ENTRANDO A EDITAR PERSONA");
                 editar(request, response);                
             break;            
+            case "buscar":
+                System.out.println("ENTRANDO A BUSCAR PERSONA");
+                search(request, response);                
+            break; 
         }        
     }  
-
+    
+    public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession sesion = request.getSession();
+        String palabra = request.getParameter("buscar");
+        List<Persona> personas = new PersonaJDBC().search(palabra);
+        sesion.setAttribute("personas", personas);        
+        request.getRequestDispatcher("/WEB-INF/personas/personas.jsp").forward(request, response);
+    }
     public void editar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         HttpSession sesion = request.getSession();
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
@@ -76,13 +87,13 @@ public class PersonasServlet extends HttpServlet{
         response.sendRedirect("index.jsp");        
     }
         
-    private void listarPersonas(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{        
-        //HttpSession sesion = request.getSession();
-        List <Persona> personas = new PersonaJDBC().listar();             
-        request.setAttribute("personas", personas);
-        List <Domicilio> domicilios = new DomicilioJDBC().listar();
-        request.getRequestDispatcher("/WEB-INF/personas/personas.jsp").forward(request, response);
-        //response.sendRedirect("/WEB-INF/personas/personas.jsp");
+    private void listarPersonas(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{                 
+        Object objetos[] = new PersonaJDBC().getPerDom();
+        List <Persona> personas = (List <Persona>) objetos[0];
+        List <Domicilio> domicilios = (List <Domicilio>) objetos[1];        
+        request.setAttribute("personas", personas);        
+        request.setAttribute("domicilios", domicilios); 
+        request.getRequestDispatcher("/WEB-INF/personas/personas.jsp").forward(request, response);        
     }    
     
     public void showInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
