@@ -15,9 +15,26 @@ public class Persona {
     private String tipo;
     private String nacionalidad;
     private String estatus; 
+    private Domicilio domi;
     
 
     public Persona() {
+    }
+
+    public Persona(int idPersona, String nombre, String apPaterno, String apMaterno, String fechaNac, String sexo, String rfc, String foto, String celular, String tipo, String nacionalidad, String estatus, Domicilio domi) {
+        this.idPersona = idPersona;
+        this.nombre = nombre;
+        this.apPaterno = apPaterno;
+        this.apMaterno = apMaterno;
+        this.fechaNac = fechaNac;
+        this.sexo = sexo;
+        this.rfc = rfc;
+        this.foto = foto;
+        this.celular = celular;
+        this.tipo = tipo;
+        this.nacionalidad = nacionalidad;
+        this.estatus = estatus;
+        this.domi = domi;
     }
 
     public Persona(int idPersona) {
@@ -149,10 +166,18 @@ public class Persona {
     public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
-
+    
+    public Domicilio getDomi(){
+        return this.domi; 
+    }
+    
+    public void setDomi(Domicilio domi){
+        this.domi = domi;
+    }
+    
     @Override
     public String toString() {
-        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apPaterno=" + apPaterno + ", apMaterno=" + apMaterno + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", celular=" + celular + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus;
+        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apPaterno=" + apPaterno + ", apMaterno=" + apMaterno + ", fechaNac=" + fechaNac + ", sexo=" + sexo + ", rfc=" + rfc + ", foto=" + foto + ", celular=" + celular + ", tipo=" + tipo + ", nacionalidad=" + nacionalidad + ", estatus=" + estatus + ", domi=" + domi;
     }
 
               

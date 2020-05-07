@@ -30,12 +30,10 @@ public class DomicilioServlet extends HttpServlet{
         }
     }    
     
-    public void insertNewDom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{        
-        System.out.println("YA ENTRO A INSERTAR NUEVO DOM");
+    public void insertNewDom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{                
         int personaId = Integer.parseInt(request.getParameter("idPersona"));
         System.out.println("personaId = " + personaId);
-        new DomicilioJDBC().updateEstatus(personaId);
-        System.out.println("YA CAMBIO EL DOMICILIO ANTERIOR");
+        new DomicilioJDBC().updateEstatus(personaId);        
         int edo = 0;
         int muni = 0;
         String calle = request.getParameter("calle");
@@ -55,8 +53,7 @@ public class DomicilioServlet extends HttpServlet{
         System.out.println("domicilio = " + domicilio);
         new DomicilioJDBC().insert(domicilio);   
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("domicilio", domicilio);
-        System.out.println("YA INSERTO EL NUEVO DOM");
+        sesion.setAttribute("domicilio", domicilio);        
         request.getRequestDispatcher("/WEB-INF/personas/personaInfo.jsp").forward(request, response);
     }    
     

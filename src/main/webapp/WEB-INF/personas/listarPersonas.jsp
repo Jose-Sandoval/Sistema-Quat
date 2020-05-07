@@ -24,6 +24,7 @@
                                 <th>telefono</th>
                                 <th>tipo</th>
                                 <th>fecha de nacimiento</th>
+                                <th>Domicilio</th>
                                 <th></th>
                             </tr>                            
                         </thead> 
@@ -37,9 +38,10 @@
                                     <th>${persona.celular}</th>
                                     <th>${persona.tipo}</th>
                                     <th>${persona.fechaNac}</th>    
+                                    <th>${persona.domi.calle}</th> 
                                     <th class="form-group">
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">                                          
-                                            <a href="${pageContext.request.contextPath}/PersonaServlet?accion=infor&idPersona=${persona.idPersona}"
+                                            <a href="${pageContext.request.contextPath}/PersonaServlet?accion=info&idPersona=${persona.idPersona}"
                                                class="btn btn-info"><i class="fas fa-info-circle"></i>Info
                                             </a>
                                             <a href="${pageContext.request.contextPath}/PersonaServlet?accion=eliminar&idPersona=${persona.idPersona}"

@@ -22,7 +22,7 @@ public class PersonasServlet extends HttpServlet{
                     System.out.println("ENTRANDO A ELIMINAR PERSONA");
                     eliminarPersona(request, response);                    
                 break;                                              
-                case "infor":       
+                case "info":       
                     System.out.println("ENTRANDO A DESPLEGAR INFO");
                     showInfo(request, response);
                 break;
@@ -88,11 +88,8 @@ public class PersonasServlet extends HttpServlet{
     }
         
     private void listarPersonas(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{                 
-        Object objetos[] = new PersonaJDBC().getPerDom();
-        List <Persona> personas = (List <Persona>) objetos[0];
-        List <Domicilio> domicilios = (List <Domicilio>) objetos[1];        
-        request.setAttribute("personas", personas);        
-        request.setAttribute("domicilios", domicilios); 
+        List<Persona> personasDom = new PersonaJDBC().getPerDom();              
+        request.setAttribute("personas", personasDom);                
         request.getRequestDispatcher("/WEB-INF/personas/personas.jsp").forward(request, response);        
     }    
     

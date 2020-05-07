@@ -82,11 +82,10 @@ public class PersonaJDBC {
         return personaId;
     }
     
-    public Object[] getPerDom(){        
+    public List<Persona> getPerDom(){        
         Connection conn = null;
         PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Object objetos[] = new Object[2];
+        ResultSet rs = null;        
         List <Persona> personas = new ArrayList();
         List <Domicilio> domicilios = new ArrayList();
         try {            
@@ -94,22 +93,17 @@ public class PersonaJDBC {
             stmt = conn.prepareStatement(SQL_SELECT_PERSONA_DOMICILIO);
             rs = stmt.executeQuery();            
             while(rs.next()){
-                Persona persona = new Persona(rs.getInt("persona_id"),
-                        rs.getString("nombre"),rs.getString("ap_Materno"),
-                        rs.getString("ap_Paterno"),rs.getString("fch_nacimiento"),
-                        rs.getString("sexo"), rs.getString("rfc"),rs.getString("foto"),
-                        rs.getString("celular"),rs.getString("tipo"),rs.getString("nacionalidad"),
-                        rs.getString("estatus"));
-                personas.add(persona);
                 Domicilio domicilio = new Domicilio(rs.getInt("domicilio_id"),
                         rs.getInt("persona_id"),rs.getString("calle"),rs.getString("numero"),
                         rs.getString("colonia"),rs.getString("cp"),rs.getInt("estado_mex_id"),
                         rs.getInt("alcaldia_municipio_id"), rs.getString("tipo"),
                         rs.getString("tel"),rs.getString("estatus"));
-                domicilios.add(domicilio);                   
-            }            
-            objetos[0]=personas;
-            objetos[1]=domicilios;            
+                Persona persona = new Persona(rs.getInt("persona_id"),rs.getString("nombre"),
+                        rs.getString("ap_Materno"),rs.getString("ap_Paterno"),rs.getString("fch_nacimiento"),
+                        rs.getString("sexo"), rs.getString("rfc"),rs.getString("foto"),rs.getString("celular"),
+                        rs.getString("tipo"),rs.getString("nacionalidad"),rs.getString("estatus"), domicilio);                        
+                personas.add(persona);                
+            }                                  
             
         } catch (SQLException ex) {
             Logger.getLogger(PersonaJDBC.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +112,7 @@ public class PersonaJDBC {
             Conexion.close(stmt);
             Conexion.close(rs);
         }
-        return objetos;
+        return personas;
     }
     
     public List<Persona> listar(){
